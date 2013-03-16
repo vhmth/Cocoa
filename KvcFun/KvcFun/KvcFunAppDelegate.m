@@ -9,10 +9,24 @@
 #import "KvcFunAppDelegate.h"
 
 @implementation KvcFunAppDelegate
+@synthesize fido;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    // Insert code here to initialize your application
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self setValue:[NSNumber numberWithInt:5]
+                forKey:@"fido"];
+        NSNumber *n = [self valueForKey:@"fido"];
+        NSLog(@"fido = %@", n);
+    }
+    return self;
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+}
+
+- (IBAction)incrementFido:(id)sender {
+    [self setFido:[self fido] + 1];
 }
 
 @end
