@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59600EF616F53165000421E3 /* txt.icns in Resources */ = {isa = PBXBuildFile; fileRef = 59600EF516F53165000421E3 /* txt.icns */; };
 		59D3A23016F464DD00ED1BAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D3A22F16F464DD00ED1BAC /* Cocoa.framework */; };
 		59D3A23A16F464DD00ED1BAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59D3A23816F464DD00ED1BAC /* InfoPlist.strings */; };
 		59D3A23C16F464DE00ED1BAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D3A23B16F464DE00ED1BAC /* main.m */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59600EF516F53165000421E3 /* txt.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = txt.icns; sourceTree = "<group>"; };
 		59D3A22C16F464DD00ED1BAC /* RaiseMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaiseMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59D3A22F16F464DD00ED1BAC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		59D3A23216F464DD00ED1BAC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -101,6 +103,7 @@
 		59D3A23616F464DD00ED1BAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				59600EF516F53165000421E3 /* txt.icns */,
 				59D3A23716F464DD00ED1BAC /* RaiseMan-Info.plist */,
 				59D3A23816F464DD00ED1BAC /* InfoPlist.strings */,
 				59D3A23B16F464DE00ED1BAC /* main.m */,
@@ -166,6 +169,7 @@
 				59D3A24016F464DE00ED1BAC /* Credits.rtf in Resources */,
 				59D3A24616F464DE00ED1BAC /* RMDocument.xib in Resources */,
 				59D3A24916F464DE00ED1BAC /* MainMenu.xib in Resources */,
+				59600EF616F53165000421E3 /* txt.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +326,7 @@
 				59D3A24E16F464DE00ED1BAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

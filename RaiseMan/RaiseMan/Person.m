@@ -20,12 +20,26 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    if (self) {
+        name = [coder decodeObjectForKey:@"name"];
+        expectedRaise = [coder decodeFloatForKey:@"expectedRaise"];
+    }
+    return self;
+}
+
 - (void)setNilValueForKey:(NSString *)key {
     if ([key isEqual:@"expectedRaise"]) {
         [self setExpectedRaise:0.0];
     } else {
         [super setNilValueForKey:key];
     }
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeFloat:expectedRaise forKey:@"expectedRaise"];
 }
 
 @end

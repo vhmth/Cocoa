@@ -141,17 +141,35 @@ static void *RMDocumentKVOContext;
                    select:YES];
 }
 
-- (NSString *)windowNibName
-{
-    // Override returning the nib file name of the document
-    // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"RMDocument";
+- (BOOL)readFromData:(NSData *)data
+              ofType:(NSString *)typeName
+               error:(NSError *__autoreleasing *)outError {
+    NSLog(@"About to read data of type %@", typeName);
+    NSMutableArray *newArray = nil;
+    @try {
+        newArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    } @catch (NSException *e) {
+        NSLog(@"exception = %@", e);
+        if (outError) {
+            NSDictionary *d = [NSDictionary
+                               dictionaryWithObject:@"The data is corrupted."
+                                             forKey:NSLocalizedFailureReasonErrorKey];
+            *outError = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                            code:unimpErr
+                                        userInfo:d];
+        }
+        return NO;
+    }
+    [self setEmployees:newArray];
+    return YES;
 }
 
-- (void)windowControllerDidLoadNib:(NSWindowController *)aController
-{
-    [super windowControllerDidLoadNib:aController];
-    // Add any code here that needs to be executed once the windowController has loaded the document's window.
+- (void)windowControllerDidLoadNib:(NSWindowController *)windowController {
+    [super windowControllerDidLoadNib:windowController];
+}
+
+- (NSString *)windowNibName {
+    return @"RMDocument";
 }
 
 + (BOOL)autosavesInPlace
@@ -159,23 +177,10 @@ static void *RMDocumentKVOContext;
     return YES;
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-{
-    // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return nil;
-}
-
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-    // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return YES;
+- (NSData *)dataOfType:(NSString *)typeName
+                 error:(NSError **)outError {
+    [[tableView window] endEditingFor:nil];
+    return [NSKeyedArchiver archivedDataWithRootObject:employees];
 }
 
 @end
