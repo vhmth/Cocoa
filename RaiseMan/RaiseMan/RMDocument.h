@@ -11,8 +11,11 @@
 
 @interface RMDocument : NSDocument {
     NSMutableArray *employees;
+    IBOutlet NSTableView *tableView;
+    IBOutlet NSArrayController *employeeController;
 }
 
+- (IBAction)createEmployee:(id)sender;
 - (void)setEmployees:(NSMutableArray *)manifest;
 - (void)insertObject:(Person *)p inEmployeesAtIndex:(NSUInteger)index;
 - (void)removeObjectFromEmployeesAtIndex:(NSUInteger)index;
