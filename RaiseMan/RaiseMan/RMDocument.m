@@ -11,6 +11,30 @@
 
 @implementation RMDocument
 
+static void *RMDocumentKVOContext;
+
+- (void)startObservingPerson:(Person *)person {
+    [person addObserver:self
+             forKeyPath:@"name"
+                options:NSKeyValueObservingOptionOld
+                context:&RMDocumentKVOContext];
+    
+    [person addObserver:self
+             forKeyPath:@"expectedRaise"
+                options:NSKeyValueObservingOptionOld
+                context:&RMDocumentKVOContext];
+}
+
+- (void)stopObservingPerson:(Person *)person {
+    [person removeObserver:self
+                forKeyPath:@"name"
+                   context:&RMDocumentKVOContext];
+    
+    [person removeObserver:self
+                forKeyPath:@"expectedRaise"
+                   context:&RMDocumentKVOContext];
+}
+
 - (id)init
 {
     self = [super init];
@@ -21,10 +45,13 @@
 }
 
 - (void)setEmployees:(NSMutableArray *)manifest {
-    if (manifest == employees) {
-        return;
+    for (Person *p in employees) {
+        [self stopObservingPerson:p];
     }
     employees = manifest;
+    for (Person *p in employees) {
+        [self startObservingPerson:p];
+    }
 }
 
 - (void)insertObject:(Person *)p inEmployeesAtIndex:(NSUInteger)index {
@@ -36,6 +63,7 @@
         [undo setActionName:@"Add Person"];
     }
     
+    [self startObservingPerson:p];
     [employees insertObject:p atIndex:index];
 }
 
@@ -49,7 +77,39 @@
         [undo setActionName:@"Remove Person"];
     }
     
+    [self stopObservingPerson:p];
     [employees removeObjectAtIndex:index];
+}
+
+- (void)changeKeyPath:(NSString *)keyPath
+             ofObject:(id)obj
+              toValue:(id)newValue {
+    [obj setValue:newValue forKeyPath:keyPath];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    if (context != &RMDocumentKVOContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+    
+    NSUndoManager *undo = [self undoManager];
+    id oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+    
+    if (oldValue == [NSNull null]) {
+        oldValue = nil;
+    }
+    NSLog(@"oldValue = %@", oldValue);
+    [[undo prepareWithInvocationTarget:self] changeKeyPath:keyPath
+                                                  ofObject:object
+                                                   toValue:oldValue];
+    [undo setActionName:@"Edit"];
 }
 
 - (NSString *)windowNibName
