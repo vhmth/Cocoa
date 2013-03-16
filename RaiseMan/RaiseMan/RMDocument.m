@@ -7,6 +7,7 @@
 //
 
 #import "RMDocument.h"
+#import "Person.h"
 
 @implementation RMDocument
 
@@ -24,6 +25,31 @@
         return;
     }
     employees = manifest;
+}
+
+- (void)insertObject:(Person *)p inEmployeesAtIndex:(NSUInteger)index {
+    NSLog(@"adding %@ to %@", p, employees);
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self]
+                            removeObjectFromEmployeesAtIndex:index];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Add Person"];
+    }
+    
+    [employees insertObject:p atIndex:index];
+}
+
+- (void)removeObjectFromEmployeesAtIndex:(NSUInteger)index {
+    Person *p = [employees objectAtIndex:index];
+    NSLog(@"removing %@ from %@", p, employees);
+    NSUndoManager *undo = [self undoManager];
+    [[undo prepareWithInvocationTarget:self] insertObject:p
+                                       inEmployeesAtIndex:index];
+    if (![undo isUndoing]) {
+        [undo setActionName:@"Remove Person"];
+    }
+    
+    [employees removeObjectAtIndex:index];
 }
 
 - (NSString *)windowNibName
