@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RMDocument : NSDocument
+@interface RMDocument : NSDocument {
+    NSMutableArray *employees;
+}
+
+- (void)setEmployees:(NSMutableArray *)manifest;
 
 @end

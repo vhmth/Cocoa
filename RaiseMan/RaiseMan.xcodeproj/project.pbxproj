@@ -14,6 +14,7 @@
 		59D3A24316F464DE00ED1BAC /* RMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D3A24216F464DE00ED1BAC /* RMDocument.m */; };
 		59D3A24616F464DE00ED1BAC /* RMDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59D3A24416F464DE00ED1BAC /* RMDocument.xib */; };
 		59D3A24916F464DE00ED1BAC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59D3A24716F464DE00ED1BAC /* MainMenu.xib */; };
+		59D3A25416F4657A00ED1BAC /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D3A25316F4657A00ED1BAC /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		59D3A24216F464DE00ED1BAC /* RMDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMDocument.m; sourceTree = "<group>"; };
 		59D3A24516F464DE00ED1BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RMDocument.xib; sourceTree = "<group>"; };
 		59D3A24816F464DE00ED1BAC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		59D3A25216F4657A00ED1BAC /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		59D3A25316F4657A00ED1BAC /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				59D3A24216F464DE00ED1BAC /* RMDocument.m */,
 				59D3A24416F464DE00ED1BAC /* RMDocument.xib */,
 				59D3A24716F464DE00ED1BAC /* MainMenu.xib */,
+				59D3A25216F4657A00ED1BAC /* Person.h */,
+				59D3A25316F4657A00ED1BAC /* Person.m */,
 				59D3A23616F464DD00ED1BAC /* Supporting Files */,
 			);
 			path = RaiseMan;
@@ -173,6 +178,7 @@
 			files = (
 				59D3A23C16F464DE00ED1BAC /* main.m in Sources */,
 				59D3A24316F464DE00ED1BAC /* RMDocument.m in Sources */,
+				59D3A25416F4657A00ED1BAC /* Person.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
